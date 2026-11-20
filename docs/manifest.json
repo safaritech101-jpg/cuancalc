@@ -1,0 +1,23 @@
+{
+  "id": "/cuancalc/",
+  "name": "CuanCalc Indonesia",
+  "short_name": "CuanCalc",
+  "description": "Kalkulator HPP, Biaya Admin Shopee & TikTok Shop, dan Profit Bersih Seller Indonesia",
+  "start_url": "/cuancalc/",
+  "scope": "/cuancalc/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "CuanCalc_icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "CuanCalc_icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
