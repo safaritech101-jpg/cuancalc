@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CuanCalc — Kalkulator HPP & Profit Shopee / TikTok Shop</title>
+<title>CuanCalc - Kalkulator HPP & Profit Shopee / TikTok Shop</title>
+<link rel="manifest" href="/cuancalc/manifest.json">
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CuanCalc">
+<link rel="apple-touch-icon" href="/cuancalc/CuanCalc_icon_under_256KB.png">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/cuancalc/sw.js');
+    });
+  }
+</script>
 <style>
   *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
   body{margin:0;background:#0f172a;color:#f8fafc;padding:16px;display:flex;justify-content:center}
@@ -55,17 +68,17 @@
 
   <button onclick="copySummary()">Salin Rincian ke WhatsApp</button>
   <div class="ad-slot" id="ad-banner" style="display:flex;justify-content:center;align-items:center;min-height:50px;">
-<script>
-  atOptions = {
-    'key' : '024d2a92a26d104e485c9e71c08c29f5',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://bicea.org/22/024d2a92a26d104e485c9e71c08c29f5"></script>
-</div>
+  <script>
+    atOptions = {
+      'key' : '024d2a92a26d104e485c9e71c08c29f5',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  </script>
+  <script src="https://bicea.org/22/024d2a92a26d104e485c9e71c08c29f5/invoke.js"></script>
+  </div>
 </div>
 
 <script>
@@ -79,23 +92,26 @@ function calc(){
 
   const fee = sell * ((admin + aff) / 100);
   const cair = sell - fee;
-  const profit = cair - (hpp + pack);
-  const margin = sell > 0 ? ((profit / sell) * 100).toFixed(1) : 0;
+  const profit = cair - hpp - pack;
+  const margin = sell > 0 ? (profit / sell) * 100 : 0;
 
   document.getElementById('totFee').textContent = rp(fee);
   document.getElementById('cair').textContent = rp(cair);
-  document.getElementById('margin').textContent = margin + '%';
+  document.getElementById('margin').textContent = margin.toFixed(1) + '%';
   const pEl = document.getElementById('profit');
   pEl.textContent = rp(profit);
   pEl.className = profit < 0 ? 'neg' : '';
 }
 function copySummary(){
-  const txt = `Rincian CuanCalc:\nHarga Jual: ${rp(+sell.value)}\nPotongan Fee: ${document.getElementById('totFee').textContent}\nProfit Bersih: ${document.getElementById('profit').textContent} (${document.getElementById('margin').textContent})`;
+  const sell = document.getElementById('sell').value;
+  const profit = document.getElementById('profit').textContent;
+  const margin = document.getElementById('margin').textContent;
+  const txt = `Simulasi CuanCalc:\nHarga Jual: Rp ${Number(sell).toLocaleString('id-ID')}\nProfit Bersih: ${profit} (${margin})`;
   navigator.clipboard.writeText(txt);
-  alert('Rincian berhasil disalin!');
+  alert('Rincian disalin!');
 }
 calc();
 </script>
-<script data-cfasync="false" src="https://bicea.org/14/1927ee4b9e7af9a733a216cc8a8a8183"></script>
+<script src="https://bicea.org/43/c7/1a/43c71aa52c2b6d90de07fd352c62939d.js"></script>
 </body>
 </html>
