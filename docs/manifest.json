@@ -10,12 +10,12 @@
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "CuanCalc_icon.png",
+      "src": "CuanCalc_icon_under_256KB.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "CuanCalc_icon.png",
+      "src": "CuanCalc_icon_under_256KB.png",
       "sizes": "512x512",
       "type": "image/png"
     }
