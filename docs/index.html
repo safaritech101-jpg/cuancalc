@@ -359,8 +359,7 @@
         <a href="https://saweria.co/safaritech" target="_blank" rel="noopener" class="btn-pro btn-template">
           Traktir Kopi (Saweria)
         </a>
-        <!-- Ganti nomor 6281234567890 dengan nomor WhatsApp Anda -->
-        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20CuanCalc,%20saya%20mau%20tanya%20soal%20audit%20harga%20/%20iklan%20toko" target="_blank" rel="noopener" class="btn-pro btn-consult">
+        <a href="https://wa.me/628131869090?text=Halo%20Admin%20CuanCalc,%20saya%20mau%20tanya%20soal%20audit%20harga%20/%20iklan%20toko" target="_blank" rel="noopener" class="btn-pro btn-consult">
           Jasa Audit Toko
         </a>
       </div>
@@ -458,6 +457,10 @@
         box.textContent = "Rincian berhasil di-copy! Siap paste ke WhatsApp.";
         setTimeout(() => { box.textContent = ""; }, 3000);
       });
+    }
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
     }
 
     calculate();
