@@ -1,117 +1,248 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CuanCalc - Kalkulator HPP & Profit Shopee / TikTok Shop</title>
-<link rel="manifest" href="/cuancalc/manifest.json">
-<meta name="theme-color" content="#0f172a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="CuanCalc">
-<link rel="apple-touch-icon" href="/cuancalc/CuanCalc_icon_under_256KB.png">
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/cuancalc/sw.js');
-    });
-  }
-</script>
-<style>
-  *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  body{margin:0;background:#0f172a;color:#f8fafc;padding:16px;display:flex;justify-content:center}
-  .card{width:100%;max-width:440px;background:#1e293b;border-radius:16px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.4)}
-  h1{font-size:1.25rem;margin:0 0 4px;color:#38bdf8}
-  p.sub{font-size:.85rem;color:#94a3b8;margin:0 0 16px}
-  label{display:block;font-size:.82rem;color:#cbd5e1;margin:10px 0 4px}
-  input,select{width:100%;padding:11px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:1rem}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .res{margin-top:18px;background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px}
-  .row{display:flex;justify-content:space-between;margin:6px 0;font-size:.9rem}
-  .big{font-size:1.2rem;font-weight:700;color:#4ade80;border-top:1px solid #334155;padding-top:10px;margin-top:8px}
-  .neg{color:#f87171}
-  .ad-slot{margin-top:16px;padding:12px;border:1px dashed #475569;border-radius:10px;text-align:center;font-size:.75rem;color:#64748b}
-  button{width:100%;margin-top:14px;padding:12px;border:none;border-radius:10px;background:#0284c7;color:#fff;font-weight:600;font-size:.95rem;cursor:pointer}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CuanCalc Indonesia — COGS, Marketplace Admin Fees & Net Profit Calculator</title>
+  <meta name="description" content="Calculate COGS, marketplace admin fees, affiliate commission, profit margin, and net profit per piece for Indonesian e-commerce sellers." />
+  <meta name="google-site-verification" content="DxRzQUyZb6qzd3jQ6Tjw9K-V1XIiTLsyTnBWR44_8aE" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background-color: #0b1120;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 16px;
+    }
+    .card {
+      background-color: #162033;
+      border: 1px solid #26334d;
+      border-radius: 16px;
+      padding: 22px 20px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      color: #38bdf8;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+    input {
+      width: 100%;
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #f8fafc;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      border-color: #38bdf8;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .results-box {
+      background-color: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      margin-bottom: 16px;
+    }
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+    .result-line span:last-child {
+      font-weight: 600;
+      color: #f8fafc;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid #1e293b;
+      margin: 12px 0;
+    }
+    .net-profit {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #22c55e;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .btn-copy {
+      width: 100%;
+      background-color: #0ea5e9;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-copy:hover {
+      background-color: #0284c7;
+    }
+    .status-box {
+      margin-top: 12px;
+      min-height: 44px;
+      border: 1px solid #26334d;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-<div class="card">
-  <h1>CuanCalc Indonesia</h1>
-  <p class="sub">Hitung HPP, Biaya Admin Marketplace & Profit Bersih</p>
+  <div class="card">
+    <h1>CuanCalc Indonesia</h1>
+    <p class="subtitle">Calculate COGS, Marketplace Admin Fees &amp; Net Profit</p>
 
-  <label>Modal Produk / HPP (Rp)</label>
-  <input type="number" id="hpp" value="35000" oninput="calc()">
-
-  <label>Biaya Packing & Operasional (Rp)</label>
-  <input type="number" id="pack" value="2500" oninput="calc()">
-
-  <div class="grid">
-    <div>
-      <label>Admin + Layanan (%)</label>
-      <input type="number" id="admin" value="8.5" step="0.1" oninput="calc()">
+    <div class="form-group">
+      <label for="cogs">Product Capital / COGS (Rp)</label>
+      <input type="number" id="cogs" value="35000" min="0" oninput="calculate()" />
     </div>
-    <div>
-      <label>Komisi Affiliate (%)</label>
-      <input type="number" id="aff" value="5" step="0.1" oninput="calc()">
+
+    <div class="form-group">
+      <label for="packing">Packing &amp; Operational Costs (Rp)</label>
+      <input type="number" id="packing" value="2500" min="0" oninput="calculate()" />
     </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="adminFee">Admin + Service (%)</label>
+        <input type="number" id="adminFee" value="8.5" min="0" step="0.1" oninput="calculate()" />
+      </div>
+      <div class="form-group">
+        <label for="affiliateFee">Affiliate Commission (%)</label>
+        <input type="number" id="affiliateFee" value="5" min="0" step="0.1" oninput="calculate()" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sellingPrice">Target Selling Price (Rp)</label>
+      <input type="number" id="sellingPrice" value="65000" min="0" oninput="calculate()" />
+    </div>
+
+    <div class="results-box">
+      <div class="result-line">
+        <span>Total Fee Deductions:</span>
+        <span id="totalFees">Rp. 8,775</span>
+      </div>
+      <div class="result-line">
+        <span>Funds Disbursed to Balance:</span>
+        <span id="disbursed">Rp. 56,225</span>
+      </div>
+      <div class="result-line" style="margin-bottom: 0;">
+        <span>Profit Margin:</span>
+        <span id="margin">28.8%</span>
+      </div>
+      <hr class="divider" />
+      <div class="net-profit">
+        <span>Net Profit / Pcs:</span>
+        <span id="netProfit">Rp. 18,725</span>
+      </div>
+    </div>
+
+    <button class="btn-copy" onclick="copyToWhatsApp()">Copy Details to WhatsApp</button>
+    <div class="status-box" id="statusBox"></div>
   </div>
 
-  <label>Target Harga Jual (Rp)</label>
-  <input type="number" id="sell" value="65000" oninput="calc()">
-
-  <div class="res">
-    <div class="row"><span>Total Potongan Fee:</span><span id="totFee">Rp 0</span></div>
-    <div class="row"><span>Dana Cair ke Saldo:</span><span id="cair">Rp 0</span></div>
-    <div class="row"><span>Margin Profit:</span><span id="margin">0%</span></div>
-    <div class="row big"><span>Profit Bersih / Pcs:</span><span id="profit">Rp 0</span></div>
-  </div>
-
-  <button onclick="copySummary()">Salin Rincian ke WhatsApp</button>
-  <div class="ad-slot" id="ad-banner" style="display:flex;justify-content:center;align-items:center;min-height:50px;">
   <script>
-    atOptions = {
-      'key' : '024d2a92a26d104e485c9e71c08c29f5',
-      'format' : 'iframe',
-      'height' : 50,
-      'width' : 320,
-      'params' : {}
-    };
+    function formatRp(num) {
+      return "Rp. " + Math.round(num).toLocaleString("en-US");
+    }
+
+    function calculate() {
+      const cogs = parseFloat(document.getElementById("cogs").value) || 0;
+      const packing = parseFloat(document.getElementById("packing").value) || 0;
+      const adminPct = parseFloat(document.getElementById("adminFee").value) || 0;
+      const affiliatePct = parseFloat(document.getElementById("affiliateFee").value) || 0;
+      const price = parseFloat(document.getElementById("sellingPrice").value) || 0;
+
+      const totalFeePct = (adminPct + affiliatePct) / 100;
+      const totalFees = price * totalFeePct;
+      const disbursed = price - totalFees;
+      const netProfit = disbursed - cogs - packing;
+      const margin = price > 0 ? (netProfit / price) * 100 : 0;
+
+      document.getElementById("totalFees").textContent = formatRp(totalFees);
+      document.getElementById("disbursed").textContent = formatRp(disbursed);
+      document.getElementById("margin").textContent = margin.toFixed(1) + "%";
+
+      const netEl = document.getElementById("netProfit");
+      netEl.textContent = formatRp(netProfit);
+      netEl.style.color = netProfit >= 0 ? "#22c55e" : "#ef4444";
+    }
+
+    function copyToWhatsApp() {
+      const price = parseFloat(document.getElementById("sellingPrice").value) || 0;
+      const cogs = parseFloat(document.getElementById("cogs").value) || 0;
+      const packing = parseFloat(document.getElementById("packing").value) || 0;
+      const fees = document.getElementById("totalFees").textContent;
+      const disbursed = document.getElementById("disbursed").textContent;
+      const margin = document.getElementById("margin").textContent;
+      const net = document.getElementById("netProfit").textContent;
+
+      const summary =
+        `*CuanCalc Indonesia Summary*\n` +
+        `Selling Price: ${formatRp(price)}\n` +
+        `COGS + Packing: ${formatRp(cogs + packing)}\n` +
+        `Total Fee Deductions: ${fees}\n` +
+        `Disbursed to Balance: ${disbursed}\n` +
+        `Profit Margin: ${margin}\n` +
+        `*Net Profit / Pcs: ${net}*`;
+
+      navigator.clipboard.writeText(summary).then(() => {
+        const status = document.getElementById("statusBox");
+        status.textContent = "Copied to clipboard! Ready to paste in WhatsApp.";
+        status.style.color = "#38bdf8";
+      });
+    }
+
+    calculate();
   </script>
-  <script src="https://bicea.org/22/024d2a92a26d104e485c9e71c08c29f5/invoke.js"></script>
-  </div>
-</div>
-
-<script>
-const rp = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
-function calc(){
-  const hpp = +document.getElementById('hpp').value || 0;
-  const pack = +document.getElementById('pack').value || 0;
-  const admin = +document.getElementById('admin').value || 0;
-  const aff = +document.getElementById('aff').value || 0;
-  const sell = +document.getElementById('sell').value || 0;
-
-  const fee = sell * ((admin + aff) / 100);
-  const cair = sell - fee;
-  const profit = cair - hpp - pack;
-  const margin = sell > 0 ? (profit / sell) * 100 : 0;
-
-  document.getElementById('totFee').textContent = rp(fee);
-  document.getElementById('cair').textContent = rp(cair);
-  document.getElementById('margin').textContent = margin.toFixed(1) + '%';
-  const pEl = document.getElementById('profit');
-  pEl.textContent = rp(profit);
-  pEl.className = profit < 0 ? 'neg' : '';
-}
-function copySummary(){
-  const sell = document.getElementById('sell').value;
-  const profit = document.getElementById('profit').textContent;
-  const margin = document.getElementById('margin').textContent;
-  const txt = `Simulasi CuanCalc:\nHarga Jual: Rp ${Number(sell).toLocaleString('id-ID')}\nProfit Bersih: ${profit} (${margin})`;
-  navigator.clipboard.writeText(txt);
-  alert('Rincian disalin!');
-}
-calc();
-</script>
-<script src="https://bicea.org/43/c7/1a/43c71aa52c2b6d90de07fd352c62939d.js"></script>
 </body>
 </html>
